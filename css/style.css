@@ -318,7 +318,21 @@ header .lead {
 }
 
 .hero-image {
+  width: 640px;
+  height: 640px;
   position: relative;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--primary-light)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  margin: auto;
+  box-shadow: var(--box-shadow);
   z-index: 1;
 }
 
@@ -333,8 +347,8 @@ header .lead {
     var(--primary-light)
   );
   border-radius: 50%;
-  top: -10px;
-  left: -10px;
+  top: 0;
+  left: 0;
   z-index: -1;
   animation: pulse 3s infinite ease-in-out;
 }
@@ -351,7 +365,11 @@ header .lead {
   }
 }
 
-.hero-image img {
+.hero-img {
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  object-fit: cover;
   border: 8px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -1046,8 +1064,8 @@ footer {
 
 /* ==== Custom Profile Circle Frame ==== */
 .profile-frame {
-  width: 360px;
-  height: 360px;
+  width: 700px;
+  height: 700px;
   border-radius: 50%;
   background: linear-gradient(
     135deg,
@@ -1064,8 +1082,8 @@ footer {
 
 .profile-img {
   border-radius: 50%;
-  width: 320px;
-  height: 320px;
+  width: 6400px;
+  height: 6400px;
   object-fit: cover;
   border: 8px solid rgba(255, 255, 255, 0.15); /* optional to match theme */
 }
