@@ -137,7 +137,7 @@
                 src="images/profile.jpg"
                 alt="Paresh Mahyavanshi"
                 class="img-fluid rounded-circle"
-                style="max-width: 440px; width: 125%"
+                style="max-width: 640px; width: 150%"
                 loading="lazy"
                 onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'640\' height=\'640\' viewBox=\'0 0 640 640\'%3E%3Crect width=\'640\' height=\'640\' fill=\'%23007bff\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-size=\'88\' text-anchor=\'middle\' fill=\'white\' font-family=\'Arial\' dominant-baseline=\'middle\'%3EPM%3C/text%3E%3C/svg%3E';"
               />
@@ -167,32 +167,43 @@
           </div> -->
           <div class="col-lg-10 text-center" data-aos="fade-up">
             <p class="about-text text-center">
-              I'm a <strong>Software Developer</strong> with expertise in
-              DevOps, data engineering, web development, and automation
-              solutions. I focus on building end-to-end systems that enhance
-              efficiency, scalability, and reliability for complex business
-              workflows using Python and related technologies.
+              I'm a <strong> Python Developer</strong> with extensive experience
+              in <strong>DevOps</strong>, <strong>cloud infrastructure</strong>,
+              and <strong>end-to-end automation</strong>. I specialize in
+              designing scalable, secure, and production-grade systems that
+              streamline complex business workflows using Python and
+              cloud-native technologies.
             </p>
+
             <p class="about-text text-center">
-              I've worked extensively with <strong>AWS</strong> cloud services,
-              containerization technologies like <strong>Docker</strong> and
-              <strong>Kubernetes</strong>, and infrastructure as code using
-              <strong>Terraform</strong> and <strong>Ansible</strong>. I'm
-              proficient in developing robust CI/CD pipelines with
+              I have deep expertise in <strong>AWS</strong> services such as
+              <strong>EC2</strong>, <strong>S3</strong>, <strong>RDS</strong>,
+              <strong>IAM</strong>, <strong>Lambda</strong>,
+              <strong>Secrets Manager</strong>, and
+              <strong>VPC</strong> networking. I build and deploy infrastructure
+              using <strong>Terraform</strong> and
+              <strong>CloudFormation</strong>, with configuration management
+              handled by <strong>Ansible</strong>.
+            </p>
+
+            <p class="about-text text-center">
+              My DevOps toolkit includes containerization with
+              <strong>Docker</strong>, orchestration with
+              <strong>Kubernetes</strong>, and CI/CD pipeline automation using
               <strong>GitLab CI/CD</strong>, <strong>GitHub Actions</strong>,
-              <strong>Jenkins</strong>, <strong>Apache Airflow</strong>, and
-              <strong>Databricks</strong>.
+              <strong>Jenkins</strong>, and <strong>Apache Airflow</strong>. I
+              also integrate <strong>Databricks</strong> for data pipeline and
+              analytics workflows.
             </p>
+
             <p class="about-text text-center">
-              My web development expertise includes building full-stack
-              applications with <strong>Django</strong> and
-              <strong>Flask</strong>, implementing role-based authentication,
-              creating responsive UIs with
-              <strong>HTML5/CSS3/JavaScript</strong>, and developing dynamic
-              interfaces with <strong>Jinja2</strong> templates. I'm experienced
-              in both relational (<strong>PostgreSQL</strong>) and NoSQL
-              (<strong>MongoDB</strong>) databases, API development, and user
-              experience optimization.
+              I develop robust backend solutions using
+              <strong>Django</strong> and <strong>Flask</strong>, incorporating
+              role-based access, secure authentication, and modular
+              architecture. My database experience spans
+              <strong>PostgreSQL</strong> and <strong>MongoDB</strong>, and I’ve
+              worked extensively on API development, data processing automation,
+              and cross-functional collaboration in cloud environments.
             </p>
             <div class="key-highlights text-center">
               <div class="highlight-item">
@@ -794,11 +805,8 @@
                 value="New message from Portfolio Website"
               />
               <input type="hidden" name="_captcha" value="false" />
-              <input
-                type="hidden"
-                name="_next"
-                value="https://pareshmahya.github.io/thankyou.html"
-              />
+              <input type="hidden" name="_next" value="thankyou.html" />
+              <input type="hidden" name="_honey" value="" />
               <div class="row g-3">
                 <div class="col-md-6">
                   <div class="form-group">
@@ -909,36 +917,5 @@
 
     <!-- Custom JS -->
     <script src="js/main.js"></script>
-
-    <script>
-      // Handle contact form submission
-      document.addEventListener("DOMContentLoaded", function () {
-        const contactForm = document.getElementById("contactForm");
-        const formStatus = document.getElementById("formStatus");
-
-        if (contactForm) {
-          contactForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
-            const subject = document.getElementById("subject").value;
-            const message = document.getElementById("message").value;
-
-            // Display success message (since we don't have a backend)
-            formStatus.innerHTML =
-              '<div class="alert alert-success">Thanks ' +
-              name +
-              "! Your message has been received. I'll get back to you soon.</div>";
-
-            // Reset form
-            contactForm.reset();
-
-            // In a real implementation, you would send this data to a server
-            console.log("Form submitted:", { name, email, subject, message });
-          });
-        }
-      });
-    </script>
   </body>
 </html>
