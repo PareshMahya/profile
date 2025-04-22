@@ -319,8 +319,8 @@ header .lead {
 
 .hero-image {
   position: relative;
-  width: 640px;
-  height: 640px;
+  width: 480px;
+  height: 480px;
   margin: auto;
   display: flex;
   align-items: center;
@@ -351,7 +351,7 @@ header .lead {
     transform: translate(-50%, -50%) scale(1);
   }
   50% {
-    transform: translate(-50%, -50%) scale(1.05);
+    transform: translate(-50%, -50%) scale(1.01);
   }
   100% {
     transform: translate(-50%, -50%) scale(1);
