@@ -4,94 +4,19 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
-  schedule:
-    - cron: "0 0 * * 0"  # At 00:00 on Sunday
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
 jobs:
-  build:
-    name: Build & Optimize
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-          cache: "npm"
-
-      - name: Install optimization tools
-        run: |
-          npm install -g minify uglify-js clean-css-cli
-
-      - name: Optimize images
-        run: |
-          echo "Optimizing images..."
-          find assets -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -exec sh -c 'echo "Optimizing $1"; file=$(basename "$1"); dir=$(dirname "$1"); cwebp -q 80 "$1" -o "${dir}/${file%.*}.webp"' sh {} \;
-
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./
-          destination: ./_site
-
-      - name: Minify CSS (after Jekyll build)
-        run: |
-          echo "Minifying CSS..."
-          cleancss -o ./_site/style.min.css ./_site/style.css
-
-      - name: Update HTML to use minified assets (after Jekyll build)
-        run: |
-          echo "Updating HTML references..."
-          sed -i 's/style.css/style.min.css/g' ./_site/index.html
-
-      - name: Create optimization summary
-        run: |
-          echo "## Build Summary" > build_summary.md
-          echo "* CSS size before: $(wc -c < style.css) bytes" >> build_summary.md
-          echo "* CSS size after: $(wc -c < ./_site/style.min.css) bytes" >> build_summary.md
-          echo "* Images optimized: $(find assets -name "*.webp" | wc -l)" >> build_summary.md
-
-      - name: Upload build summary
-        uses: actions/upload-artifact@v3
-        with:
-          name: build-summary
-          path: build_summary.md
-
-      - name: Upload optimized site artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: ./_site
-
   deploy:
-    name: Deploy to Pages
-    needs: build
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
-
-      - name: Display deployment URL
-        run: echo "🚀 Deployed to ${{ steps.deployment.outputs.page_url }}"
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./
+      - uses: actions/deploy-pages@v4
