@@ -137,7 +137,7 @@
                 src="images/profile.jpg"
                 alt="Paresh Mahyavanshi"
                 class="img-fluid rounded-circle"
-                style="max-width: 350px; width: 100%"
+                style="max-width: 440px; width: 125%"
                 loading="lazy"
                 onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'640\' height=\'640\' viewBox=\'0 0 640 640\'%3E%3Crect width=\'640\' height=\'640\' fill=\'%23007bff\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-size=\'88\' text-anchor=\'middle\' fill=\'white\' font-family=\'Arial\' dominant-baseline=\'middle\'%3EPM%3C/text%3E%3C/svg%3E';"
               />
@@ -745,7 +745,7 @@
                 <i class="fas fa-phone"></i>
                 <div>
                   <h3>Phone</h3>
-                  <p>+1 (226) 972-6367</p>
+                  <p>+1 (222) 333-4444</p>
                 </div>
               </div> -->
               <div class="contact-item">
@@ -782,7 +782,23 @@
             </div>
           </div>
           <div class="col-lg-7" data-aos="fade-left">
-            <form class="contact-form" id="contactForm" method="POST">
+            <form
+              class="contact-form"
+              id="contactForm"
+              action="https://formsubmit.co/pmahyavanshi13@gmail.com"
+              method="POST"
+            >
+              <input
+                type="hidden"
+                name="_subject"
+                value="New message from Portfolio Website"
+              />
+              <input type="hidden" name="_captcha" value="false" />
+              <input
+                type="hidden"
+                name="_next"
+                value="https://pareshmahya.github.io/thankyou.html"
+              />
               <div class="row g-3">
                 <div class="col-md-6">
                   <div class="form-group">
@@ -893,5 +909,36 @@
 
     <!-- Custom JS -->
     <script src="js/main.js"></script>
+
+    <script>
+      // Handle contact form submission
+      document.addEventListener("DOMContentLoaded", function () {
+        const contactForm = document.getElementById("contactForm");
+        const formStatus = document.getElementById("formStatus");
+
+        if (contactForm) {
+          contactForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const subject = document.getElementById("subject").value;
+            const message = document.getElementById("message").value;
+
+            // Display success message (since we don't have a backend)
+            formStatus.innerHTML =
+              '<div class="alert alert-success">Thanks ' +
+              name +
+              "! Your message has been received. I'll get back to you soon.</div>";
+
+            // Reset form
+            contactForm.reset();
+
+            // In a real implementation, you would send this data to a server
+            console.log("Form submitted:", { name, email, subject, message });
+          });
+        }
+      });
+    </script>
   </body>
 </html>
