@@ -359,8 +359,8 @@ header .lead {
 }
 
 .hero-img {
-  width: 600px;
-  height: 600px;
+  width: 480px;
+  height: 480px;
   border-radius: 50%;
   object-fit: cover;
   border: 8px solid rgba(255, 255, 255, 0.15);
