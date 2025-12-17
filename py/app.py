@@ -9,6 +9,11 @@ from email.message import EmailMessage
 # Create Flask application instance
 app = Flask(__name__)
 
+# Root route for Render health checks
+@app.route("/", methods=["GET", "HEAD"])
+def home():
+    return "Backend is running", 200
+
 @app.route("/contact", methods=["POST"])
 def contact():
     """
@@ -16,6 +21,8 @@ def contact():
     It sends the message as an email using values provided
     securely via environment variables.
     """
+    
+    print("POST /contact received")
 
     # Read form data sent from the browser
     name = request.form.get("name")
@@ -46,11 +53,16 @@ def contact():
     )
 
     # Connect to Gmail SMTP using secure TLS
-    with smtplib.SMTP("smtp.gmail.com", 587) as server:
-        server.starttls()               # encrypt connection
-        server.login(sender_email, sender_secret)
-        server.send_message(msg)
-
+    try:
+        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+            server.starttls()
+            server.login(sender_email, sender_secret)
+            server.send_message(msg)
+        print("Email sent successfully")
+    except Exception as e:
+        print("Email failed:", e)
+        return "Email send failed", 500
+    
     # Redirect user back to thank you page on your website
     return redirect("https://pareshmahya.github.io/profile/thankyou.html")
 
@@ -60,10 +72,9 @@ def contact():
 def healthz():
     return "ok", 200
 
-
 # Local development entry point
 if __name__ == "__main__":
-    app.run()
-
-
+    port = int(os.getenv("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
+    
 #
