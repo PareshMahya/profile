@@ -52,7 +52,7 @@ def contact():
         server.send_message(msg)
 
     # Redirect user back to thank you page on your website
-    return redirect("https://YOUR_GITHUB_PAGES_URL/thankyou.html")
+    return redirect("https://pareshmahya.github.io/profile/thankyou.html")
 
 
 # Optional health check endpoint for Render (safe to expose)
