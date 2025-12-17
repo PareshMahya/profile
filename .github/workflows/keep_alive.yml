@@ -31,16 +31,16 @@ jobs:
         run: |
           python py/health_check.py
         env:
-          RENDER_HEALTH_URL: ${{ secrets.RENDER_HEALTH_URL }}
+          RENDER_HEALTH_URL: ${{ secrets.HEALTH_URL }}
 
       - name: Send email on failure
         if: failure()
         run: |
           python py/send_alert_email.py
         env:
-          SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
-          SENDER_EMAIL_PASSWORD: ${{ secrets.SENDER_EMAIL_PASSWORD }}
-          RECEIVER_EMAIL: ${{ secrets.RECEIVER_EMAIL }}
-          RENDER_HEALTH_URL: ${{ secrets.RENDER_HEALTH_URL }}
+          SENDER_EMAIL: ${{ secrets.GHACTION_POSTMAN }}
+          SENDER_EMAIL_PASSWORD: ${{ secrets.GHACTION_MAIL }}
+          RECEIVER_EMAIL: ${{ secrets.GHACTION_HOME }}
+          RENDER_HEALTH_URL: ${{ secrets.HEALTH_URL }}
 
 #
