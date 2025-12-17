@@ -76,7 +76,7 @@ if (contactForm) {
       return;
     }
 
-    // ✔ If validation passes, DO NOT prevent submit
+    // If validation passes, DO NOT prevent submit
     // Browser will POST to the backend normally
   });
 }
