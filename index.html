@@ -827,13 +827,9 @@
               action="https://profile-backend-ld0f.onrender.com/contact"
               method="POST"
             >
-              <input
-                type="hidden"
-                name="_subject"
-                value="New message from Portfolio Website"
-              />
-              <input type="hidden" name="_next" value="thankyou.html" />
+              <!-- Honeypot field (spam protection) -->
               <input type="text" name="bot-check" style="display:none" />
+            
               <div class="row g-3">
                 <div class="col-md-6">
                   <div class="form-group">
@@ -842,11 +838,13 @@
                       type="text"
                       id="name"
                       name="name"
+                      placeholder="Your name"
                       class="form-control"
                       required
                     />
                   </div>
                 </div>
+            
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="email">Your Email</label>
@@ -854,11 +852,13 @@
                       type="email"
                       id="email"
                       name="email"
+                      placeholder="Your Email"
                       class="form-control"
                       required
                     />
                   </div>
                 </div>
+            
                 <div class="col-12">
                   <div class="form-group">
                     <label for="subject">Subject</label>
@@ -866,23 +866,27 @@
                       type="text"
                       id="subject"
                       name="subject"
+                      placeholder="Subject"
                       class="form-control"
                       required
                     />
                   </div>
                 </div>
+            
                 <div class="col-12">
                   <div class="form-group">
                     <label for="message">Message</label>
                     <textarea
                       id="message"
                       name="message"
+                      placeholder="Your Message"
                       rows="5"
                       class="form-control"
                       required
                     ></textarea>
                   </div>
                 </div>
+            
                 <div class="col-12">
                   <button type="submit" class="btn btn-primary">
                     Send Message
@@ -891,6 +895,8 @@
                 </div>
               </div>
             </form>
+
+            
           </div>
         </div>
       </div>
