@@ -33,8 +33,8 @@ def contact():
     # Read secrets from environment variables
     # These values are NOT stored in this repository
     sender_email = os.getenv("GHACTION_POSTMAN")   # sender email
-    sender_secret = os.getenv("GHACTION_HOME")     # sender app secret
-    receiver_email = os.getenv("GHACTION_MAIL")    # receiver email
+    sender_secret = os.getenv("GHACTION_MAIL")     # sender app secret
+    receiver_email = os.getenv("GHACTION_HOME")    # receiver email
 
     # Basic safety check to ensure required values exist
     if not sender_email or not sender_secret or not receiver_email:
