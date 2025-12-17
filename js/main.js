@@ -52,19 +52,32 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// Form submission handling
+// Form validation (DO NOT block submission)
 const contactForm = document.getElementById("contactForm");
+
 if (contactForm) {
   contactForm.addEventListener("submit", function (event) {
-    // For now, we're just adding a basic form submission handler
-    // This can be expanded with actual form processing logic
-    event.preventDefault();
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const subject = document.getElementById("subject").value.trim();
+    const message = document.getElementById("message").value.trim();
 
-    // Show success message (this would be replaced with actual form submission)
-    const formStatus = document.getElementById("formStatus");
-    formStatus.innerHTML = `<div class="alert alert-success">Thanks for your message! I'll get back to you soon.</div>`;
+    // Basic empty check
+    if (!name || !email || !subject || !message) {
+      event.preventDefault();
+      alert("Please fill in all fields.");
+      return;
+    }
 
-    // Reset form
-    contactForm.reset();
+    // Minimum message length
+    if (message.length < 10) {
+      event.preventDefault();
+      alert("Message must be at least 10 characters long.");
+      return;
+    }
+
+    // ✔ If validation passes, DO NOT prevent submit
+    // Browser will POST to the backend normally
   });
 }
+
