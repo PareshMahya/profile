@@ -112,10 +112,19 @@ if (contactForm) {
         return response.json();
     })
     .then(data => {
-          // THE MAGIC SWAP:
-          contactForm.style.display = "none"; // Hide the form
-          successMessage.style.display = "block"; // Show the beautiful template
-          window.scrollTo({ top: contactForm.offsetTop - 100, behavior: 'smooth' });
+      // Hide the form
+      if (contactForm) contactForm.style.display = "none"; 
+      // Hide the "Sending..." status if it's still there
+      if (formStatus) formStatus.style.display = "none";
+      // Show the success message template
+      if (successMessage) {
+        successMessage.style.display = "block";
+      }
+      // Reset the form data in the background
+      contactForm.reset();
+      // NOTE: Automatic scroll removed. 
+      // User must click the "Go to Top" button manually now.
+      //  window.scrollTo({ top: contactForm.offsetTop - 100, behavior: 'smooth' });
     })
     .catch(error => {
         console.error("Error:", error);
