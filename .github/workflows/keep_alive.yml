@@ -6,7 +6,7 @@ name: Render Health Check
 
 on:
   schedule:
-    - cron: "*/05 * * * *"
+    - cron: "0 0/5 * * * *"
   workflow_dispatch:
 
 jobs:
