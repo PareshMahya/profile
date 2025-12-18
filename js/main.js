@@ -112,8 +112,8 @@ if (contactForm) {
         return response.json();
     })
     .then(data => {
-        // SUCCESS: Redirect to your thank you page
-        window.location.href = "https://pareshmahya.github.io/thankyou.html";
+        // SUCCESS: Redirect using a relative path
+        window.location.href = "thankyou.html";
     })
     .catch(error => {
         console.error("Error:", error);
