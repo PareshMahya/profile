@@ -5,7 +5,7 @@ AOS.init({
   once: true,
 });
 
-// Active nav highlight
+// Active nav highlight (ScrollSpy)
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll(".nav-link");
 
@@ -15,9 +15,8 @@ window.addEventListener("scroll", () => {
 
   sections.forEach((section) => {
     const sectionTop = section.offsetTop;
-    const sectionHeight = section.clientHeight;
-
-    if (scrollY >= sectionTop - 200) {
+    // -200 is an offset to trigger the change before the section hits the very top
+    if (scrollY >= sectionTop - 250) {
       current = section.getAttribute("id");
     }
   });
@@ -30,29 +29,32 @@ window.addEventListener("scroll", () => {
   });
 });
 
-// Navbar background toggle
+// Navbar and Back-to-top logic
 const navbar = document.querySelector(".navbar");
-
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 50) {
-    navbar.classList.add("navbar-scrolled");
-  } else {
-    navbar.classList.remove("navbar-scrolled");
-  }
-});
-
-// Back to top button
 const backToTopButton = document.querySelector(".back-to-top");
 
 window.addEventListener("scroll", () => {
-  if (window.scrollY > 300) {
-    backToTopButton.classList.add("show");
-  } else {
-    backToTopButton.classList.remove("show");
+  const scrollPos = window.scrollY;
+  
+  // Toggle Navbar Background
+  if (navbar) {
+    scrollPos > 50 ? navbar.classList.add("navbar-scrolled") : navbar.classList.remove("navbar-scrolled");
+  }
+
+  // Toggle Back-to-top visibility
+  if (backToTopButton) {
+    scrollPos > 300 ? backToTopButton.classList.add("show") : backToTopButton.classList.remove("show");
   }
 });
 
-// Form validation (DO NOT block submission)
+// Back to top click - ADDED NULL CHECK HERE
+if (backToTopButton) {
+  backToTopButton.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
+// Form validation
 const contactForm = document.getElementById("contactForm");
 
 if (contactForm) {
@@ -61,23 +63,27 @@ if (contactForm) {
     const email = document.getElementById("email").value.trim();
     const subject = document.getElementById("subject").value.trim();
     const message = document.getElementById("message").value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // Basic empty check
     if (!name || !email || !subject || !message) {
       event.preventDefault();
       alert("Please fill in all fields.");
       return;
     }
 
-    // Minimum message length
+    if (!emailRegex.test(email)) {
+      event.preventDefault();
+      alert("Please enter a valid email address.");
+      return;
+    }
+
     if (message.length < 10) {
       event.preventDefault();
       alert("Message must be at least 10 characters long.");
       return;
     }
-
-    // If validation passes, DO NOT prevent submit
-    // Browser will POST to the backend normally
+    // Success: Browser proceeds to POST to your form action
   });
 }
 
+//
