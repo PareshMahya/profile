@@ -112,8 +112,10 @@ if (contactForm) {
         return response.json();
     })
     .then(data => {
-        // SUCCESS: Redirect using a relative path
-        window.location.href = "thankyou.html";
+          // THE MAGIC SWAP:
+          contactForm.style.display = "none"; // Hide the form
+          successMessage.style.display = "block"; // Show the beautiful template
+          window.scrollTo({ top: contactForm.offsetTop - 100, behavior: 'smooth' });
     })
     .catch(error => {
         console.error("Error:", error);
