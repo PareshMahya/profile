@@ -68,6 +68,10 @@ if (contactForm) {
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
     const message = document.getElementById("message").value.trim();
+    // Check if subject field exists, otherwise use a default string
+    const subjectField = document.getElementById("subject");
+    const subject = subjectField ? subjectField.value.trim() : "New Portfolio Message!";
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     // Validation
@@ -86,15 +90,22 @@ if (contactForm) {
     }
 
     // Prepare data
-    const formData = new FormData(contactForm);
-
-    // Send via AJAX
+    const data = {
+        name: name,
+        email: email,
+        _subject: subject, 
+        message: message,
+        _captcha: "false" // Ensures no bot-check page
+    };
+    
+    // Send via AJAX using JSON
     fetch("https://formsubmit.co/ajax/el/culija", {
         method: "POST",
-        body: formData,
-        headers: {
+        headers: { 
+            'Content-Type': 'application/json',
             'Accept': 'application/json'
-        }
+        },
+        body: JSON.stringify(data)
     })
     .then(response => {
         if (!response.ok) throw new Error('Network response was not ok');
