@@ -54,36 +54,62 @@ if (backToTopButton) {
   });
 }
 
-// Form validation
+/**
+ * CONTACT FORM HANDLING (The AJAX Fix)
+ * This sends data in the background so you never see the "Bot Check" page.
+ */
 const contactForm = document.getElementById("contactForm");
+const formStatus = document.getElementById("formStatus");
 
 if (contactForm) {
   contactForm.addEventListener("submit", function (event) {
+    event.preventDefault(); // This is critical: it prevents the 404/Bot-check page
+
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
-    const subject = document.getElementById("subject").value.trim();
     const message = document.getElementById("message").value.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!name || !email || !subject || !message) {
-      event.preventDefault();
+    // Validation
+    if (!name || !email || !message) {
       alert("Please fill in all fields.");
       return;
     }
-
     if (!emailRegex.test(email)) {
-      event.preventDefault();
       alert("Please enter a valid email address.");
       return;
     }
 
-    if (message.length < 10) {
-      event.preventDefault();
-      alert("Message must be at least 10 characters long.");
-      return;
+    // Show "Sending..." message to the user
+    if (formStatus) {
+      formStatus.innerHTML = '<div class="alert alert-info">Sending message... please wait.</div>';
     }
-    // Success: Browser proceeds to POST to your form action
+
+    // Prepare data
+    const formData = new FormData(contactForm);
+
+    // Send via AJAX
+    fetch("https://formsubmit.co/ajax/el/culija", {
+        method: "POST",
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.json();
+    })
+    .then(data => {
+        // SUCCESS: Redirect to your thank you page
+        window.location.href = "https://pareshmahya.github.io/thankyou.html";
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        if (formStatus) {
+            formStatus.innerHTML = '<div class="alert alert-danger">Error sending message. Please try again or email me directly.</div>';
+        }
+    });
   });
 }
-
 //
