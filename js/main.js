@@ -99,7 +99,7 @@ if (contactForm) {
     };
     
     // Send via AJAX using JSON
-    fetch("https://formsubmit.co/ajax/el/culija", {
+    fetch("https://formsubmit.co/ajax/pmahyavanshi13@gmail.com", {
         method: "POST",
         headers: { 
             'Content-Type': 'application/json',
