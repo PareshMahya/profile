@@ -102,7 +102,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 Feel free to reach out to me if you have any questions or would like to collaborate:
 
-- Email: your.email@example.com
+- Email: pmahyavanshi13@gmail.com
 - LinkedIn: [Paresh Mahyavanshi](https://linkedin.com/in/PareshMahya)
 - GitHub: [PareshMahya](https://github.com/PareshMahya)
 
